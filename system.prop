@@ -1,3 +1,11 @@
+# Dalvik heap
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=288m
+dalvik.vm.heapsize=768m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+
 # Display density
 ro.sf.lcd_density=480
 
