@@ -30,27 +30,28 @@
 #include <sys/types.h>
 
 #include "vendor_init.h"
-#include "property_service.h"
 #include "util.h"
 
 using android::init::import_kernel_cmdline;
-using android::init::property_set;
 
-void property_override(char const prop[], char const value[])
+std::vector<std::string> ro_props_default_source_order = {
+    "",
+    "odm.",
+    "product.",
+    "system.",
+    "system_ext.",
+    "vendor.",
+};
+
+void property_override(char const prop[], char const value[], bool add = true)
 {
     prop_info *pi;
 
     pi = (prop_info*) __system_property_find(prop);
     if (pi)
         __system_property_update(pi, value, strlen(value));
-    else
+    else if (add)
         __system_property_add(prop, strlen(prop), value, strlen(value));
-}
-
-void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
-{
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
 }
 
 static void import_kernel_nv(const std::string& key,
@@ -61,25 +62,29 @@ static void import_kernel_nv(const std::string& key,
     if (key == "oemandroidboot.phoneid") {
         // Dual Sim variant contains two IMEIs separated by comma.
         if ((count(value.begin(), value.end(),',')) > 0) {
-            property_set("persist.multisim.config", "dsds");
-            property_set("persist.radio.multisim.config", "dsds");
-            property_set("ro.telephony.default_network", "9,1");
-            property_set("ro.semc.product.model", "E6683");
-            property_set("ro.semc.product.name", "Xperia Z5 Dual");
-            property_override_dual("ro.product.model", "ro.vendor.product.model", "E6683");
-            property_override_dual("ro.product.name", "ro.vendor.product.name", "sumire_dsds");
-            property_override_dual("ro.product.device", "ro.vendor.product.device", "sumire_dsds");
-            property_override("ro.build.description", "sumire_dsds-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
-            property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire_dsds/sumire_dsds:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            property_override("persist.multisim.config", "dsds");
+            property_override("persist.radio.multisim.config", "dsds");
+            property_override("ro.telephony.default_network", "9,1");
+            property_override("ro.semc.product.model", "E6683");
+            property_override("ro.semc.product.name", "Xperia Z5 Dual");
+            for (const auto &source : ro_props_default_source_order) {
+	        set_ro_build_prop("source", "model", "E6683");
+	        set_ro_build_prop("source", "name", "sumire_dsds");
+	        set_ro_build_prop("source", "device", "sumire_dsds");
+	        set_ro_build_prop("source", "description", "sumire_dsds-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
+	        set_ro_build_prop("source", "fingerprint", "Sony/sumire_dsds/sumire_dsds:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            }
         } else {
-            property_set("ro.telephony.default_network", "9");
-            property_set("ro.semc.product.model", "E6653");
-            property_set("ro.semc.product.name", "Xperia Z5");
-            property_override_dual("ro.product.model", "ro.vendor.product.model", "E6653");
-            property_override_dual("ro.product.name", "ro.vendor.product.name", "sumire");
-            property_override_dual("ro.product.device", "ro.vendor.product.device", "sumire");
-            property_override("ro.build.description", "sumire-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
-            property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire/sumire:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            property_override("ro.telephony.default_network", "9");
+            property_override("ro.semc.product.model", "E6653");
+            property_override("ro.semc.product.name", "Xperia Z5");
+            for (const auto &source : ro_props_default_source_order) {
+                property_override_dual("source", "model", "E6653");
+                property_override_dual("source", "name", "sumire");
+                property_override_dual("source", "device", "sumire");
+                property_override("source", "description",  "sumire-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
+                property_override_dual("source", "fingerprint", "Sony/sumire/sumire:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            }
         }
     }
 }
