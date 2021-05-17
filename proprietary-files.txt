@@ -588,8 +588,8 @@ etc/firmware/touch_module_id_0x21.img
 etc/touch_fw_update.sh
 
 # Wifi
-etc/firmware/wlan/bcmdhd/fw_bcmdhd.bin
-etc/firmware/wlan/bcmdhd/fw_bcmdhd_apsta.bin
+etc/firmware/wlan/bcmdhd/fw_bcmdhd.bin:system/vendor/firmware/wlan/bcmdhd/fw_bcmdhd.bin
+etc/firmware/wlan/bcmdhd/fw_bcmdhd_apsta.bin:system/vendor/firmware/wlan/bcmdhd/fw_bcmdhd.bin
 
 # Fingerprint
 vendor/firmware/tzfingerprint.mdt
