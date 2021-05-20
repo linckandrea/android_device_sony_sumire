@@ -34,7 +34,7 @@ TARGET_SCREEN_WIDTH := 1080
 
 # init
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/bin/init.qcom.power.sh:system/bin/init.qcom.power.sh
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.power.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.power.sh
 
 # Audio configuration
 PRODUCT_COPY_FILES += \

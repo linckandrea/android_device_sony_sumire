@@ -1,3 +1,7 @@
+# Core ctl
+ro.core_ctl_min_cpu=0
+ro.core_ctl_max_cpu=4
+
 # Dalvik heap
 dalvik.vm.heapstartsize=16m
 dalvik.vm.heapgrowthlimit=288m
