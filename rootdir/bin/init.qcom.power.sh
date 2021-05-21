@@ -88,7 +88,7 @@ chown system:system /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
 chown system:system /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
 
 # Setting B.L scheduler parameters
-# write /proc/sys/kernel/power_aware_timer_migration 1
+write /proc/sys/kernel/power_aware_timer_migration 1
 write /proc/sys/kernel/sched_migration_fixup 1
 write /proc/sys/kernel/sched_small_task 30
 write /proc/sys/kernel/sched_upmigrate 95
