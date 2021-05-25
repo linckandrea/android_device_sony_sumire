@@ -76,7 +76,7 @@ static void import_kernel_nv(const std::string& key,
             property_override_dual("ro.product.name", "ro.vendor.product.name", "sumire_dsds");
             property_override_triple("ro.product.device", "ro.product.system.device", "ro.product.vendor.device", "sumire_dsds");
             property_override("ro.build.description", "sumire_dsds-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
-            property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire_dsds/sumire_dsds:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire_dsds/sumire_dsds:7.1.1/N-MR1-KITAKAMI-170920-0229/1:user/dev-keys");
         } else {
             property_override("ro.telephony.default_network", "9");
             property_override("ro.semc.product.model", "E6653");
@@ -85,7 +85,7 @@ static void import_kernel_nv(const std::string& key,
             property_override_dual("ro.product.name", "ro.vendor.product.name", "sumire");
             property_override_triple("ro.product.device", "ro.product.system.device", "ro.product.vendor.device", "sumire");
             property_override("ro.build.description", "sumire-user 7.1.1 N-MR1-KITAKAMI-170609-1025 1 dev-keys");
-            property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire/sumire:7.1.1/N-MR1-KITAKAMI-170609-1025/1:user/dev-keys");
+            property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Sony/sumire/sumire:7.1.1/N-MR1-KITAKAMI-170920-0229/1:user/dev-keys");
         }
     }
 }

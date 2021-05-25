@@ -17,3 +17,6 @@ ro.sf.lcd_density=480
 ro.semc.content.number=PA5
 ro.semc.ms_type_id=PM-0908-BV
 ro.semc.product.device=E66
+
+# Vendor security patch level
+ro.lineage.build.vendor_security_patch=2017-09-01
