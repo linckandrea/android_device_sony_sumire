@@ -73,19 +73,19 @@ write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
 write /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis 80000
 write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
 
-# configure sultan's cpu input boost
-write /sys/kernel/cpu_input_boost/ib_freqs "960000 960000"
-write /sys/kernel/cpu_input_boost/ib_duration_ms 500
-write /sys/kernel/cpu_input_boost/enabled 1
-
 # plugin remaining A57s
 write /sys/devices/system/cpu/cpu5/online 1
 write /sys/devices/system/cpu/cpu6/online 1
 write /sys/devices/system/cpu/cpu7/online 1
 
+# configure sultan's cpu input boost
+write /sys/kernel/cpu_input_boost/ib_freqs "960000 960000"
+write /sys/kernel/cpu_input_boost/ib_duration_ms 500
+write /sys/kernel/cpu_input_boost/enabled 1
+
 # Configure core_ctl module parameters
 write /sys/devices/system/cpu/cpu4/core_ctl/max_cpus 4
-write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 0
+write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 1
 write /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres 60
 write /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres 30
 write /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms  100
@@ -152,4 +152,3 @@ get-set-forall /sys/devices/soc.0/qcom,bcl.*/vph_high_thresh_uv 4300000
 get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_mask $bcl_hotplug_mask
 get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_soc_mask $bcl_hotplug_soc_mask
 get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode enable
-
